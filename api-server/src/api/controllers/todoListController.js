@@ -1,17 +1,35 @@
+const TodoList = require('../models/todoListModel');
+
 module.exports = {
     get: (req, res) => {
-        res.send("todo get");
+        TodoList.find({}, (err, todo) => {
+            if(err) res.send(err);
+            res.send(todo);
+        });
     },
     store: (req, res) => {
-        res.send("todo store");
+        let todo = new TodoList(req.body);
+        todo.save((err, todo) => {
+            if(err) res.send(err);
+            res.send(todo);
+        });
     },
     detail: (req, res) => {
-        res.send("todo detail");
+        TodoList.findById(req.params.todoId, (err, todo) => {
+            if(err) res.send(err);
+            res.send(todo);
+        });
     },
     update: (req, res) => {
-        res.send("todo update");
+        TodoList.findOneAndUpdate({_id: req.params.todoId }, req.body, {new: true}, (err, todo) => {
+            if(err) res.send(err);
+            res.send(todo);
+        });
     },
     delete: (req, res) => {
-        res.send("todo delete");
+        TodoList.remove({_id: req.params.todoId }, (err, todo) => {
+            if(err) res.send(err);
+            res.send(todo);
+        });
     },
 }
