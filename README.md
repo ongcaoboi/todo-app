@@ -1,6 +1,6 @@
 # TODO-APP
 
-This repo is api todo app
+This repo is api todo app using nodejs and mongodb
 
 ## Get stated
 
