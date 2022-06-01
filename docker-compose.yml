@@ -19,6 +19,11 @@ services:
     container_name: mongo
     image: mongo:latest
     volumes:
-      - ./data:/data/db
+      - mongodata:/data/db
+#     - ./data:/data/db
     ports:
       - '27017:27017'
+
+volumes:
+  mongodata:
+    name: todo-app-api-mongo-db

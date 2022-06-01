@@ -1,16 +1,24 @@
-const { DB_URI, port } = require('./src/config/index');
+const { DB_URI, port, SECRET_KEY } = require('./src/config/index');
 const app = require('./src/app');
 const mongooes = require('mongoose');
-mongooes.connect(DB_URI)
+
+if (DB_URI) {
+  mongooes.connect(DB_URI)
     .then(res => {
-        console.log("DB Connected!");
+      console.log("DB Connected!");
+      app.listen(port, () => {
+        console.info('todo app restful api server started on: ' + port);
+        console.log('-----------------------------------------------');
+      });
     })
     .catch(err => {
-        console.log(Error, err.message);
+      console.error(Error, err.message);
+      console.error('Todo app restful api server is stopped!');
+      console.log('-----------------------------------------------');
     });
-
-
-app.listen(port, () => {
-    console.log('Todo app RESTful API server started on: ' + port);
-    console.log('-----------------------------------------------');
-});
+}
+else {
+  console.error('Environment Variable not found');
+  console.error('Todo app restful api server is stopped!');
+  console.log('-----------------------------------------------');
+}
