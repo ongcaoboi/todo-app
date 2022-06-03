@@ -15,7 +15,7 @@ docker-compose up
 
 ```
 
-- run npm start BEFORE run docker-composer up
+- run npm install BEFORE run docker-composer up
 
 ## How to use?
 
