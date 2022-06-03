@@ -175,8 +175,11 @@ class _LoginPageState extends State<LoginPage> {
         }
         return;
       } else {
-        msg = responseBody["message"] +
-            '! account not found or not connet server';
+        if (responseBody["message"] == "Error") {
+          msg = "Account not found!";
+        } else {
+          msg = responseBody["message"];
+        }
       }
     } else {
       msg = "Error: " + response.statusCode.toString();
