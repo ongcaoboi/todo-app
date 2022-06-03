@@ -8,15 +8,8 @@ import 'dart:io';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-Future<void> main() async {
-  await callApis();
-  // await getviewdata();
+void main() {
   runApp(MyApp());
-}
-
-callApis() async {
-  final response = await http.get('http://192.168.116.176:3000/api/users');
-  print(response.body);
 }
 
 class MyApp extends StatelessWidget {
