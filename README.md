@@ -15,6 +15,8 @@ docker-compose up
 
 ```
 
+- run npm start BEFORE run docker-composer up
+
 ## How to use?
 
 - You can use postman to test api
