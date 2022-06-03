@@ -38,6 +38,7 @@ docker-compose up
    
  ``` json
 {
+  "name": "Example",
   "email": "example@email.com",
   "password": "123456"
 }
@@ -48,6 +49,7 @@ docker-compose up
 {
     "result": "ok",
     "data": {
+        "name": "example",
         "email": "example@gmail.com",
         "password": "e10adc3949ba59abbe56e057f20f883e",
         "_id": "6297baa0287d65e97e083ad3",
@@ -107,6 +109,26 @@ docker-compose up
 ```
 - ...
 
-### ~!
+## Use Flutter app 
+
+- Require: Clone project, run api-server.
+- Change host name ./mobile-client/lib/global.dart.
+  
+### Using android devices 
+
+- Connect your pc and device to the same network.
+- host = ipv4 pc.
+
+### Using emulator 
+
+- host = 10.0.2.2
+
+### run mobile app with flutter
+
+```sh
+ run --no-sound-null-safety
+```
+
+Test app!
 
 Goodlook!

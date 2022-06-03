@@ -4,6 +4,10 @@ const validator = require('validator');
 const TodoList = require('./todoModel');
 
 let userSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,

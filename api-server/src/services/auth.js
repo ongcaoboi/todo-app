@@ -1,6 +1,8 @@
 const { SECRET_KEY, TIME_OUT_TOKEN } = require('../config/index');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
+const Users = require('../models/userModel');
+const { deleteOne } = require('../models/userModel');
 
 function verifyToken(token) {
   if (token && validator.isJWT(token)) {
@@ -8,7 +10,7 @@ function verifyToken(token) {
       if (decoded) {
         return decoded;
       }
-      else if (err) {
+      else {
         return undefined;
       }
     });
@@ -24,8 +26,20 @@ const checkLogin = (req, res, next) => {
   let token = req.headers['access_token'];
   let data_user = verifyToken(token);
   if (data_user) {
-    req.data_user = data_user;
-    next();
+    console.log(req.headers);
+    console.log(data_user);
+    Users.findById(data_user.id, (err, user) => {
+      if (user) {
+        req.data_user = data_user;
+        next();
+      }
+      else {
+        res.json({
+          result: 'err',
+          message: 'Invalid Token'
+        });
+      }
+    })
   }
   else {
     res.json({

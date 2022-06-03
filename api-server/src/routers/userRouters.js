@@ -2,6 +2,9 @@ module.exports = (app) => {
   const user = require('../controllers/userController');
   const auth = require('../services/auth');
 
+  app.route('/api/user')
+    .get(auth.checkLogin, user.getOne);
+
   app.route('/api/users')
     .get(user.getAll);
 

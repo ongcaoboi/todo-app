@@ -12,13 +12,14 @@ module.exports = {
         if (err) {
           res.json({
             result: 'err',
-            message: err
+            message: err.message
           });
         }
         else if (user) {
           if (user.password == md5(req.body.password)) {
             let token = auth.siginToken({
               id: user._id,
+              name: user.name,
               email: user.email
             });
             res.json({
@@ -44,6 +45,7 @@ module.exports = {
   },
   register: (req, res) => {
     let user = new Users({
+      name: req.body.name,
       email: req.body.email,
       password: md5(req.body.password)
     });
@@ -55,7 +57,7 @@ module.exports = {
         });
       }
       else if (err) {
-        let message = err;
+        let message = err.message;
         if (err.code == 11000) message = 'email has been used!'
         res.json({
           result: 'err',
@@ -93,7 +95,7 @@ module.exports = {
               if (err) {
                 res.json({
                   result: 'err',
-                  message: message
+                  message: err.message
                 });
               }
               else if (user) {
@@ -126,12 +128,18 @@ module.exports = {
       }
     });
   },
+  getOne: (req, res) => {
+    res.json({
+      result: 'ok',
+      data: req.data_user
+    })
+  },
   getAll: (req, res) => {
     Users.find({}, (err, users) => {
       if (err) {
         res.json({
           result: 'err',
-          message: err
+          message: err.message
         });
       }
       else if (users) {
